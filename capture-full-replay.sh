@@ -118,7 +118,7 @@ function capture() {
     docker run --rm -d --name=$container_name -P --expose 24444 \
 	   --shm-size=2g -e VNC_PASSWORD=hola \
 	   -e VIDEO=true -e AUDIO=true \
-	   -e SCREEN_WIDTH=1080 -e SCREEN_HEIGHT=720 \
+	   -e SCREEN_WIDTH=1920 -e SCREEN_HEIGHT=1080 \
 	   -e FFMPEG_DRAW_MOUSE=0 \
 	   -e FFMPEG_FRAME_RATE=24 \
 	   -e FFMPEG_CODEC_ARGS="-vcodec libx264 -preset ultrafast -pix_fmt yuv420p -strict -2 -acodec aac" \
