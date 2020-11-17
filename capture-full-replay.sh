@@ -121,6 +121,7 @@ function capture() {
 	   -e SCREEN_WIDTH=1920 -e SCREEN_HEIGHT=1080 \
 	   -e FFMPEG_DRAW_MOUSE=0 \
 	   -e FFMPEG_FRAME_RATE=24 \
+       -e SEND_ANONYMOUS_USAGE_INFO="false" \
 	   -e FFMPEG_CODEC_VA_ARGS="-vcodec libx264 -preset ultrafast -pix_fmt yuv420p -strict -2 -acodec aac" \
 	   elgalu/selenium
 
