@@ -148,7 +148,7 @@ function capture() {
     progress_bar $(echo "$seconds - 10" | bc)
 
     # Save the captured video
-    docker exec $container_name stop-video
+    podman exec $container_name stop-video
 
     output_dir=$(mktemp -d)
 
