@@ -115,7 +115,7 @@ function capture() {
     # Startup Selenium server
     #  -e VIDEO_FILE_EXTENSION="mkv" \
 	#  -p 5920:25900 : we don't need to connect via VNC
-    docker run --rm -d --name=$container_name -P --expose 24444 \
+    podman run --rm -d --name=$container_name -P --expose 24444 \
 	   --shm-size=2g -e VNC_PASSWORD=hola \
 	   -e VIDEO=true -e AUDIO=true \
 	   -e SCREEN_WIDTH=1920 -e SCREEN_HEIGHT=1080 \
@@ -125,9 +125,9 @@ function capture() {
 	   -e FFMPEG_CODEC_VA_ARGS="-vcodec libx264 -preset ultrafast -pix_fmt yuv420p -strict -2 -acodec aac" \
 	   elgalu/selenium
 
-    bound_port=$(docker inspect --format='{{(index (index .NetworkSettings.Ports "24444/tcp") 0).HostPort}}' $container_name)
+    bound_port=$(podman inspect --format='{{(index (index .NetworkSettings.Ports "24444/tcp") 0).HostPort}}' $container_name)
 
-    docker exec $container_name wait_all_done 30s
+    podman exec $container_name wait_all_done 30s
 
     echo 
     echo "Please wait for $seconds seconds, while we capture the playback..."
@@ -152,8 +152,8 @@ function capture() {
 
     output_dir=$(mktemp -d)
 
-    docker cp $container_name:/videos/. $output_dir/
-    docker stop $container_name
+    podman cp $container_name:/videos/. $output_dir/
+    podman stop $container_name
 
     captured_video=$(ls -1 $output_dir/*.mp4)
 
