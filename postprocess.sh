@@ -2,11 +2,11 @@
 
 while getopts ":s:d:l:o:" opt; do
   case $opt in
-    s) start="$OPTARG"
+    s) start="-ss $OPTARG"
     ;;
-    d) duration="$OPTARG"
+    d) duration="-to $OPTARG"
     ;;
-    l) latency="$OPTARG"
+    l) latency="-itsoffset $OPTARG"
     ;;
     o) output="$OPTARG"
     ;;
@@ -22,8 +22,4 @@ if [ $# -lt 1 ]; then
     exit 2
 fi
 
-echo $start
-echo $duration
-echo $1
-
-ffmpeg -i $1 -itsoffset $latency -i $1 -c:a copy -c:v copy -map 0:v:0 -map 1:a:0 -ss $start -to $duration $output
+ffmpeg -i $1 $latency -i $1 -c:a copy -c:v copy -map 0:v:0 -map 1:a:0 $start $duration $output
